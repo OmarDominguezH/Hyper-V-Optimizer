@@ -6,6 +6,13 @@ import threading
 import tkinter as tk
 from tkinter import messagebox, ttk
 
+# Indica a Windows que este programa tiene su propio identificador de aplicación
+try:
+    myappid = 'HyperV' # Cambia esto por el nombre que quieras
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+except Exception:
+    pass
+
 def is_admin():
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
@@ -54,11 +61,15 @@ def disable_hyperv_all_versions(log_widget, progress_bar, root, btn):
 
 def set_persistence():
     try:
-        script_path = os.path.abspath(sys.argv[0])
-        task_name = "StopHyperVAuto"
-        sys32 = os.path.join(os.environ['SystemRoot'], 'System32')
-        schtasks = os.path.join(sys32, 'schtasks.exe')
-        cmd = f'{schtasks} /create /tn "{task_name}" /tr "pythonw.exe \'{script_path}\' --auto" /sc onlogon /rl highest /f'
+        # Detecta si corre como .py o como un ejecutable .exe compilado
+        if getattr(sys, 'frozen', False):
+            script_path = sys.executable
+            # Comando directo sin invocar a pythonw.exe
+            cmd = f'schtasks /create /tn "StopHyperVAuto" /tr "\'{script_path}\' --auto" /sc onlogon /rl highest /f'
+        else:
+            script_path = os.path.abspath(sys.argv[0])
+            cmd = f'schtasks /create /tn "StopHyperVAuto" /tr "pythonw.exe \'{script_path}\' --auto" /sc onlogon /rl highest /f'
+
         subprocess.run(cmd, shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
     except:
         pass
@@ -91,6 +102,12 @@ else:
         sys.exit()
 
     root = tk.Tk()
+    try:
+        # Configura el icono de la ventana. Asegúrate de que el archivo 'tu_icono.ico' esté en la misma carpeta.
+        root.iconbitmap('hyperv.ico')
+    except Exception:
+        pass
+
     root.title("Hyper-V Killer & Optimizer")
     root.geometry("550x520")
     root.configure(bg="#ffffff")
