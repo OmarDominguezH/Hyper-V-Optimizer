@@ -2,13 +2,20 @@
 
 Esta herramienta está diseñada para desactivar completamente las funciones de virtualización de Windows (Hyper-V, VBS, Device Guard) con el fin de maximizar el rendimiento en emuladores de terceros como BlueStacks, LDPlayer, NoxPlayer y software de virtualización como VMware o VirtualBox.
 
-## 🚀 Cómo usarlo (Paso a paso)
+## 📥 Descarga
+
+Puedes obtener la versión más reciente del ejecutable listo para usar desde el siguiente enlace:
+👉 **[Descargar Hyper-V-Optimizer.exe](https://github.com/OmarDominguezH/Hyper-V-Optimizer/releases/download/HyperV/hyperv.exe)**
+
+## � Cómo usarlo (Paso a paso)
 
 1.  **Requisitos previos:**
-    *   Tener instalado **Python 3.x**.
+    *   **Si usas el Ejecutable (.exe):** No requiere ninguna instalación adicional, es portable.
+    *   **Si usas el Script (.pyw):** Requiere tener instalado **Python 3.x**.
     *   Asegurarse de tener el archivo `hyperv.ico` en la misma carpeta si deseas ver el icono personalizado.
 2.  **Ejecución:**
-    *   Haz doble clic en el archivo `hyperv.pyw` (usar la extensión `.pyw` es clave para que no se abra una ventana negra de consola).
+    *   **Método 1 (Recomendado):** Ejecuta directamente el archivo `HyperV-Optimizer.exe`.
+    *   **Método 2 (Manual):** Haz doble clic en el archivo `hyperv.pyw` (la extensión `.pyw` es clave para que no se abra una ventana negra de consola).
     *   El programa solicitará permisos de administrador automáticamente de forma silenciosa. Acepta el diálogo de Windows.
 3.  **Interfaz:**
     *   Lee la descripción y las advertencias de seguridad.
@@ -48,6 +55,20 @@ La función `set_persistence()` crea una tarea programada en Windows (`schtasks`
 
 ### 5. Multitarea (Threading)
 Para que la interfaz de usuario (GUI) no se congele mientras se ejecutan los comandos de PowerShell (que pueden tardar varios segundos), el proceso de optimización se ejecuta en un hilo (`threading.Thread`) separado.
+
+---
+
+## 🤝 Contribuir
+
+¡Las contribuciones son bienvenidas! Si deseas colaborar con el desarrollo o mejorar el código, sigue estos pasos:
+
+1.  **Clona el repositorio:**
+    ```bash
+    git clone https://github.com/OmarDominguezH/Hyper-V-Optimizer.git
+    ```
+2.  **Crea una nueva rama** para tus cambios (`git checkout -b feature/nueva-mejora`).
+3.  **Realiza tus mejoras** en el código (asegúrate de mantener la compatibilidad con el modo silencioso).
+4.  **Envía un Pull Request** explicando detalladamente qué cambios has realizado.
 
 ---
 
